@@ -58,6 +58,29 @@ Here is how to install an extension on VScode:
 
 <img src="images/vscode-extensions.png" width="100%" align="center"/></a>
 
+### Docker Hub
+
+Container Registry has a similar functionality as Github for code, and it uses to store and share images. There are many container registries, and the most common is  Docker Hub. We will use throughout the tutorial Docker Hub to pull different images, such as Python built-in images. To register and create an account go to https://hub.docker.com and follow the registration instructions.
+
+After installing Docker Desktop and setting account on Docker Hub, open Docker Desktop, and from the command line, login to Docker Hub:
+
+``` shell
+ docker login
+```
+
+For the login, you will have to enter your username and password, and you should expect the following output if the login is successful:
+
+``` shell
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: rkrispin
+Password:
+Login Succeeded
+
+Logging in with your password grants your terminal complete access to your account.
+For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+```
+**Note:**  Docker Hub is completely public (at the free tier). Any image you push and store there will be available for all other users. **NEVER** store credentials, passwords, or any other sensitive information on your Docker images.
+
 
 ### Setting Docker
 Various ways exist to build and run Docker images on different operations systems. For the purpose of this guide, we will be utilizing Docker Desktop. It is a user-friendly container management interface that is compatible with MacOS, Windows, and Linux operating systems.
