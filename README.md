@@ -4,7 +4,7 @@ WIP 🚧 🏗 pre spellcheck
 
 This repo provides a step-by-step guide and a template for setting up a Python 🐍 development environment with VScode and Docker 🐳. Docker is an amazing tool, but it has some learning curve. This tutorial aims to reduce the entry barrier for learning tools such as Docker.
 
-##Table of contents
+## Table of contents
 - Motivation
 - Scope
 - Prerequisites 
