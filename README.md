@@ -58,6 +58,17 @@ Here is how to install an extension on VScode:
 
 <img src="images/vscode-extensions.png" width="100%" align="center"/></a>
 
+
+### Setting Docker
+Various ways exist to build and run Docker images on different operations systems. For the purpose of this guide, we will be utilizing Docker Desktop. It is a user-friendly container management interface that is compatible with MacOS, Windows, and Linux operating systems.
+
+Note: Docker Desktop is free for personal use but requires a license for commercial use. For further information, please refer to https://www.docker.com/pricing/.
+
+To install Docker Desktop, go to Docker website and follow the installation instructions according to your OS:
+
+ <img src="images/docker-install.png" width="100%" align="center"/></a>
+
+
 ### Docker Hub
 
 Container Registry has a similar functionality as Github for code, and it uses to store and share images. There are many container registries, and the most common is  Docker Hub. We will use throughout the tutorial Docker Hub to pull different images, such as Python built-in images. To register and create an account go to https://hub.docker.com and follow the registration instructions.
@@ -82,14 +93,7 @@ For better security, log in with a limited-privilege personal access token. Lear
 **Note:**  Docker Hub is completely public (at the free tier). Any image you push and store there will be available for all other users. **NEVER** store credentials, passwords, or any other sensitive information on your Docker images.
 
 
-### Setting Docker
-Various ways exist to build and run Docker images on different operations systems. For the purpose of this guide, we will be utilizing Docker Desktop. It is a user-friendly container management interface that is compatible with MacOS, Windows, and Linux operating systems.
-
-Note: Docker Desktop is free for personal use but requires a license for commercial use. For further information, please refer to https://www.docker.com/pricing/.
-
-To install Docker Desktop, go to Docker website and follow the installation instructions according to your OS:
-
- <img src="images/docker-install.png" width="100%" align="center"/></a>
+### Hello World!
 
 There is no better way to test if Docker was installed properly than by running whalesay (or 🐳  say) Docker's most `Hello World!` common example. The whalesay is an adaption of the Linux cowsay (🐮 say) game using a whale instead of a cow to print some text. Let's run the below code from the terminal to print `Hello Python Users! 👋 🐍`:
 
