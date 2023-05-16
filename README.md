@@ -42,6 +42,8 @@ Docker's high reproducibility, coupled with the seamless integration of Visual S
 
 ## Scope
 
+This tutorial focuses on setting up a dockerized Python development environment with VScode. We will explore how to integrate VScode with Docker using Microsoft's [Dev Container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extensions and show various of methods for configuring a Python environment with Docker. However, it's important to note that while this tutorial covers some of the core Docker features, it is not a complete Docker guide. If you don't have previous experience with Docker, I highly recommend taking one of the Docker crash courses.
+
 ## Prerequisites 
 
 Generally, this tutorial does not require a previous experience with Docker and VScode. In line with the tutorial scope above, the goal is to teach you how to set up a Python development environment using Docker and VScode. However, if you are new to Docker, I highly recommend taking one of the Docker crash courses prior to starting with this tutorial.
@@ -153,7 +155,12 @@ _______________________________
           \____\______/
 ```
 
+If you are able to run the `whalesay` app you are ready to get started with Docker.
+
 ## Getting started with Docker
+
+
+<img src="images/docker-workflow.png" width="100%" align="center"/></a>
 
 ## Docker with Python - the hard way
 
