@@ -22,7 +22,8 @@
                 "RDebugger.r-debugger",
                 "purocean.drawio-preview",
                 "graysonstream.airflow-templates",
-                "necatiarslan.airflow-vscode-extension"
+                "necatiarslan.airflow-vscode-extension",
+                "hediet.vscode-drawio"
             ]
         }
     }  
