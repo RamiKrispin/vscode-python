@@ -193,6 +193,56 @@ Let's now organize and order this process to a general workflow. The below diagr
 In the next section, we review Docker basic commands and learn how to set Dockerfile. 
 
 ## Getting started with Docker
+Generally, the VScode **Dev Container** extension lets you containerize your environment by importing a built-in image. However, often, you may want to add more layers (e.g., install additional dependencies) or build it yourself. This section focuses on the essential Docker requirements that will enable you to build your image:
+
+- **Dockerfile** - the image recipe, allows you to add components and customize the dependencies according to the development environment requirements  
+- **Docker CLI** - core commands to build the image and run it as a containerized environment 
+
+**Note:** It is important to emphasize that this section covers the basic Docker requirements for this tutorial and is not an alternative to a full Docker tutorial or course. 
+
+### General Architecture
+TODO
+
+### The Dockerfile
+The `Dockerfile` provides a set of instructions for the Docker engine about how to build the image. You can think about it as the image's recipe. It has its own unique and intuitive syntax following this structure:
+
+``` Dockerfile
+COMMAND some instructions
+```
+
+For example, the following `Dockerfile` imports the official Python (version 3.10) image as the base image and then using the `apt-get update` and `apt-get install` to install the `curl` library :
+
+
+The following example demonstrate a simple Dockerfile:
+
+`./examples/ex-1/Dockerfile`
+``` Dockerfile
+FROM python:3.10
+
+LABEL example=1
+
+ENV PYTHON_VER=3.10
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl
+```
+
+In a nutshell, we used the `FROM` command to specify the image we want to import from the Docker registry (don't forget to login to the Docker registry service you are using before building the image!). The `LABEL` command is used to set labels or comments, and the `ENV` command is to set environment variables. Last but not least, the `RUN` command is used to run a command on the command line, in this case, to install the `curl` library.
+
+Let's now review the Dockerfile core commands:
+- `FROM` - Defines the base image to use for the image's build. In most cases, unless you are building the image from scratch, you will use some base image with some pre-installed OS and some dependencies. For example, in this tutorial, we will import as our base image the official [Python image](https://hub.docker.com/_/python)
+- `LABEL` - Enables to add information about the image to the image's metadata, such as authors, maintainers, license, etc.
+- `ENV` - Uses to set environment variables
+- `ARG` - Enables to set parameters during the build time
+- `RUN` -  Allows executing CLI commands (e.g., `pip install ...`, `apt-get ...`, `apt-install...`, `wget...`, etc.) during the build time to add additional components to the base image
+- `COPY` - Enables to copy objects (e.g., files and folders) from your local system to the image 
+- `WORKDIR` - Sets the working directory inside the image
+- `EXPOSE` - Defines the port number to expose the image during the run time
+- `CMD` - Sets a default command to execute during the run time of the image
+- `ENDPOINT` - Allows configuring a container that will run as an executable
+
+Do not worry if, at this point, you do not fully understand the use cases of some of those commends. It will make more sense when we start to build images in the next section.
+
+
 
 ## Docker with Python - the hard way
 
