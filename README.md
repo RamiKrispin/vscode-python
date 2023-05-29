@@ -193,10 +193,14 @@ Let's now organize and order this process to a general workflow. The below diagr
 In the next section, we review Docker basic commands and learn how to set Dockerfile. 
 
 ## Getting started with Docker
-Generally, the VScode **Dev Container** extension lets you containerize your environment by importing a built-in image. However, often, you may want to add more layers (e.g., install additional dependencies) or build it yourself. This section focuses on the essential Docker requirements that will enable you to build your image:
+Generally, the VScode **Dev Container** extension lets you containerize your environment by importing a built-in image. However, often, you may want to add more layers (e.g., install additional dependencies) or build it yourself. This section focuses on the essential Docker requirements that will enable you to build your image and run it inside a container:
 
 - **Dockerfile** - the image recipe, allows you to add components and customize the dependencies according to the development environment requirements  
 - **Docker CLI** - core commands to build the image and run it as a containerized environment 
+
+
+<img src="images/dockerfile to container.png" width="100%" align="center"/></a>
+
 
 **Note:** It is important to emphasize that this section covers the basic Docker requirements for this tutorial and is not an alternative to a full Docker tutorial or course. 
 
