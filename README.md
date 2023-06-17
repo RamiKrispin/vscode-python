@@ -207,6 +207,9 @@ Generally, the VScode **Dev Container** extension lets you containerize your env
 ### General Architecture
 TODO
 
+
+
+
 ### The Dockerfile
 The `Dockerfile` provides a set of instructions for the Docker engine about how to build the image. You can think about it as the image's recipe. It has its own unique and intuitive syntax following this structure:
 
@@ -244,7 +247,7 @@ Let's now review the Dockerfile core commands:
 - `CMD` - Sets a default command to execute during the run time of the image
 - `ENDPOINT` - Allows configuring a container that will run as an executable
 
-Do not worry if, at this point, you do not fully understand the use cases of some of those commends. It will make more sense when we start to build images in the next section.
+Do not worry if, at this point, you do not fully understand the use cases of some of those commands. It will make more sense when we start to build images in the next section.
 
 
 
