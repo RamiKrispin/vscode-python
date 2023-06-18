@@ -295,6 +295,19 @@ You should expect the following output:
 
  ```
 
+
+It might be hard at this point to observe from the above output, but Docker images are based on layers. Those layers aligned with the `Dockerfile` commands and enabled time-saving during the build time with the use of layer caching. We can observe in the above output that the image is constructed by two main layers:
+- The first layer started with `[1/2] FROM...`, corresponding to the `FROM python:3.10` line on the `Dockerfile`, which import the Python 3.10 official image
+- The second layer started with `[2/2] RUN apt-get...`, corresponding  to the `RUN` command on the `Dockerfile`
+
+
+**Note:** When importing an external image with the `FROM` command, on the backend, the docker engine will pull and attach to the new image the layers and metadata of the imported image. In the following section, we will dive into the architect of the image layers.
+
+
+### The image layers
+
+
+
 ## Docker with Python - the hard way
 
 ## Setting Python environment with Docker 
