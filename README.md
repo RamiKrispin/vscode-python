@@ -248,7 +248,7 @@ Do not worry if, at this point, you do not fully understand the use cases of som
 Once the `Dockerfile` is ready, the next step is to build the image using the  `docker build` command from the command line. For example, let's build the above `Dockerfile` using the `build` command from this repo root folder:
 
 ``` shell
-docker build . -f /examples/ex-1/Dockerfile -t rkrispin/vscode-python:ex1 
+docker build . -f ./examples/ex-1/Dockerfile -t rkrispin/vscode-python:ex1 
 ```
 
 Here are the arguments we used with the `build` command:
@@ -295,16 +295,54 @@ You should expect the following output:
 
  ```
 
+**Note:** The above output of the build describes the different layers of the image. Don't worry if, at this point, it looks and sounds like gibberish. Reading this output type will be easier after reading the next section, which focuses on the image layers.
 
-It might be hard at this point to observe from the above output, but Docker images are based on layers. Those layers aligned with the `Dockerfile` commands and enabled time-saving during the build time with the use of layer caching. We can observe in the above output that the image is constructed by two main layers:
+
+You can use the `docker images` command to validate that the image was created successfully:
+
+``` shell
+>docker images
+REPOSITORY                             TAG       IMAGE ID       CREATED        SIZE
+rkrispin/vscode-python                 ex1       a8e4c6d06c97   43 hours ago   1.02GB
+```
+
+The next section will focus on the image layers and caching process.
+
+
+### The image layers
+
+The build process of Docker's images is based on layers. Depending on the context, the docker engine takes each one of the `Dockerfile` commands during the build time and translates it either into layer or metadata. `Dockerfile` commands, such as `FROM` and `RUN` are translated into a layer, and commands, such as `LABEL`, `ARG`, `ENV`, and `CMD` are translated into metadata. For example, we can observe in the output of the build of `rkrispin/vscode-python` image above that there are two layers:
 - The first layer started with `[1/2] FROM...`, corresponding to the `FROM python:3.10` line on the `Dockerfile`, which import the Python 3.10 official image
 - The second layer started with `[2/2] RUN apt-get...`, corresponding  to the `RUN` command on the `Dockerfile`
 
 
-**Note:** When importing an external image with the `FROM` command, on the backend, the docker engine will pull and attach to the new image the layers and metadata of the imported image. In the following section, we will dive into the architect of the image layers.
+<img src="images/docker-layers.png" width="100%" align="center"/></a>
+
+The `docker inspect` command returns the image metadata details in a JSON format. That includes the envrioment variables, labels, layers and general metadata. In the following example, we will us [jq](https://jqlang.github.io/jq/) to extract the layers information from the metadata JSON file:
+
+``` shell
+> docker inspect rkrispin/vscode-python:ex1 | jq '.[] | .RootFS'
+{
+  "Type": "layers",
+  "Layers": [
+    "sha256:332b199f36eb054386cd2931c0824c97c6603903ca252835cc296bacde2913e1",
+    "sha256:2f98f42985b15cbe098d2979fa9273e562e79177b652f1208ae39f97ff0424d3",
+    "sha256:964529c819bb33d3368962458c1603ca45b933487b03b4fb2754aa55cc467010",
+    "sha256:e67fb4bad8f42cca08769ee21bbe15aca61ab97d4a46b181e05fefe3a03ee06d",
+    "sha256:037f26f869124174b0d6b6d97b95a5f8bdff983131d5a1da6bc28ddbc73531a5",
+    "sha256:737cec5220379f795b727e6c164e36e8e79a51ac66a85b3e91c3f25394d99224",
+    "sha256:65f4e45c2715f03ed2547e1a5bdfac7baaa41883450d87d96f877fbe634f41a9",
+    "sha256:baef981f26963b264913e79bd0a1472bae389441022d71f559e9d186600d2629",
+    "sha256:88e1d36ff4812423afc93d5f6208f2783df314d5ecf6f961325c65e1dbf891da"
+  ]
+}
+
+```
+
+As you can see from the image's layers output above, the `rkrispin/vscode-python:ex1` image image has nine layers. Each layer is represented by its hash key (e.g., `sha256:...`), and it is cached on the backend. While we saw on the build output that the docker engine triggered two processes from the `FROM` and `RUN` commands, we ended up with nine layers as opposed to two. The main reason for that is related to the fact that when importing the baseline image, we inherited the imported image characteristics, including the layers. In this case, we used the `FROM` to import the official Python image, which included eight layers and then added the 9th layer by executing the RUN commands.
 
 
-### The image layers
+
 
 
 
