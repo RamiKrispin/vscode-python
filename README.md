@@ -339,11 +339,38 @@ The `docker inspect` command returns the image metadata details in a JSON format
 
 ```
 
-As you can see from the image's layers output above, the `rkrispin/vscode-python:ex1` image image has nine layers. Each layer is represented by its hash key (e.g., `sha256:...`), and it is cached on the backend. While we saw on the build output that the docker engine triggered two processes from the `FROM` and `RUN` commands, we ended up with nine layers as opposed to two. The main reason for that is related to the fact that when importing the baseline image, we inherited the imported image characteristics, including the layers. In this case, we used the `FROM` to import the official Python image, which included eight layers and then added the 9th layer by executing the RUN commands.
+As you can see from the image's layers output above, the `rkrispin/vscode-python:ex1` image has nine layers. Each layer is represented by its hash key (e.g., `sha256:...`), and it is cached on the backend. While we saw on the build output that the docker engine triggered two processes from the `FROM` and `RUN` commands, we ended up with nine layers as opposed to two. The main reason for that is related to the fact that when importing the baseline image, we inherited the imported image characteristics, including the layers. In this case, we used the `FROM` to import the official Python image, which included eight layers, and then added the 9th layer by executing the `RUN` commands. You can test it by pulling the baseline image and using the inspect command to review its layers:
 
+``` shell
+> docker pull python:3.10
+3.10: Pulling from library/python
+bba7bb10d5ba: Already exists 
+ec2b820b8e87: Already exists 
+284f2345db05: Already exists 
+fea23129f080: Already exists 
+7c62c924b8a6: Already exists 
+c48db0ed1df2: Already exists 
+f614a567a403: Already exists 
+00c5a00c6bc2: Already exists 
+Digest: sha256:a8462db480ec3a74499a297b1f8e074944283407b7a417f22f20d8e2e1619782
+Status: Downloaded newer image for python:3.10
+docker.io/library/python:3.10
 
-
-
+> docker inspect python:3.10 | jq '.[] | .RootFS'
+{
+  "Type": "layers",
+  "Layers": [
+    "sha256:332b199f36eb054386cd2931c0824c97c6603903ca252835cc296bacde2913e1",
+    "sha256:2f98f42985b15cbe098d2979fa9273e562e79177b652f1208ae39f97ff0424d3",
+    "sha256:964529c819bb33d3368962458c1603ca45b933487b03b4fb2754aa55cc467010",
+    "sha256:e67fb4bad8f42cca08769ee21bbe15aca61ab97d4a46b181e05fefe3a03ee06d",
+    "sha256:037f26f869124174b0d6b6d97b95a5f8bdff983131d5a1da6bc28ddbc73531a5",
+    "sha256:737cec5220379f795b727e6c164e36e8e79a51ac66a85b3e91c3f25394d99224",
+    "sha256:65f4e45c2715f03ed2547e1a5bdfac7baaa41883450d87d96f877fbe634f41a9",
+    "sha256:baef981f26963b264913e79bd0a1472bae389441022d71f559e9d186600d2629"
+  ]
+}
+```
 
 
 ## Docker with Python - the hard way
