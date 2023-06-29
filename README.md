@@ -448,8 +448,18 @@ As can be noticed from the above build output, the first and second layers alrea
 
 Since we already cached the 3rd layer on the previous build, all the layers in the above output are cached, and the run time is less than 1 second.
 
+When setting your Dockerfile, you should be minded and strategic to the layers caching process. The order of the layers does matter! The following images demonstrate when the docker engine will use cached layers and when to rebuild them. The first image illustrates the initial build: 
 
 
+<img src="images/docker layers 1.png" width="100%" align="center"/></a>
+
+In this case, we have a Dockerfile with four commands that are translated during the build time into four layers. What will happen if we add a fifth command and place it right after the third one? The docker engine will identify that the first and second commands in the Dockerfile did not change and, therefore, will use the corresponding cached layers (one and two), and rebuild the rest of the layers from scratch:
+
+<img src="images/docker layers 2.png" width="100%" align="center"/></a>
+
+When planning your Dockerfile, if applicable,  a good practice is to place the commands that will most likely stay the same and keep new updates to the end of the file if possible.
+
+That was just the tip of the iceberg, and there is much more to learn about Docker. The next section will explore different methods to run Python inside a container.
 
 ## Docker with Python - the hard way
 
