@@ -372,6 +372,84 @@ docker.io/library/python:3.10
 }
 ```
 
+### Layers caching
+
+One of the cons of Docker is the image build time. As the level of complexity of the Dockerfile is higher (e.g., a large number of dependencies), the longer the build time. Sometimes, your build won't execute as expected on the first try. Either some requirements are missing, or something breaks during the build time. This is where the use of caching helps in reducing the image rebuild time. Docker has smart mechanization that identifies if each layer should be built from scratch or can leverage a cached layer and save time. For example, let's add to the previous example another command to install the `vim` editor. Generally, we can (and should) add it to the same apt-get we are using to install the `curl` package, but for the purpose of showing the layers caching functionality, we will run it separately:
+
+
+`./examples/ex-2/Dockerfile`
+``` Dockerfile
+FROM python:3.10
+
+LABEL example=1
+
+ENV PYTHON_VER=3.10
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl
+
+RUN apt-get update && apt-get install -y --no-install-recommends vim
+```
+
+We will use the below command to build this image and tag it as `rkrispin/vscode-python:ex2`:
+
+``` shell
+docker build . -f ./examples/ex-2/Dockerfile -t rkrispin/vscode-python:ex2 --progress=plain
+```
+You should expect the following output (if ran the previous build):
+
+``` shell
+ => [internal] load build definition from Dockerfile                                                                                                                                     0.0s
+ => => transferring dockerfile: 234B                                                                                                                                                     0.0s
+ => [internal] load .dockerignore                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/python:3.10                                                                                                                           0.0s
+ => [1/3] FROM docker.io/library/python:3.10                                                                                                                                             0.0s
+ => CACHED [2/3] RUN apt-get update && apt-get install -y --no-install-recommends curl                                                                                                   0.0s
+ => [3/3] RUN apt-get update && apt-get install -y --no-install-recommends vim                                                                                                          34.3s
+ => exporting to image                                                                                                                                                                   0.4s 
+ => => exporting layers                                                                                                                                                                  0.4s 
+ => => writing image sha256:be39eb0eb986f083a02974c2315258377321a683d8472bac15e8d5694008df35                                                                                             0.0s 
+ => => naming to docker.io/rkrispin/vscode-python:ex2   
+ ```
+
+
+As can be noticed from the above build output, the first and second layers already exist from the previous build. Therefore, the docker engine adds their cached layers to the image (as opposed to building them from scratch), and just builds the 3rd layer and installs the vim editor.
+
+**Note:** By default, the build output is concise and short. You can get more detailed output during the build time by adding the `progress` argument and setting it to `plain`:
+
+``` shell
+> build . -f ./examples/ex-2/Dockerfile -t rkrispin/vscode-python:ex2 --progress=plain
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 234B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.10
+#3 DONE 0.0s
+
+#4 [1/3] FROM docker.io/library/python:3.10
+#4 DONE 0.0s
+
+#5 [2/3] RUN apt-get update && apt-get install -y --no-install-recommends curl
+#5 CACHED
+
+#6 [3/3] RUN apt-get update && apt-get install -y --no-install-recommends vim
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 writing image sha256:be39eb0eb986f083a02974c2315258377321a683d8472bac15e8d5694008df35 0.0s done
+#7 naming to docker.io/rkrispin/vscode-python:ex2 done
+#7 DONE 0.0s
+```
+
+Since we already cached the 3rd layer on the previous build, all the layers in the above output are cached, and the run time is less than 1 second.
+
+
+
 
 ## Docker with Python - the hard way
 
