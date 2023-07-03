@@ -9,8 +9,8 @@ This repo provides a step-by-step guide and a template for setting up a Python �
 - Scope
 - Prerequisites 
 - General Architecture and Workflow
-- Getting Started with Docker 🚧 WIP 🏗
-- Docker with Python - the Hard Way 🚧 WIP 🏗
+- Getting Started with Docker
+- Running Python on Docker - the Hard Way 
 - Setting Python Environment with Docker  🚧 WIP 🏗
 
 
@@ -535,5 +535,14 @@ While there are ways to overcome the above issues, it is still convoluted and no
 
 ## Setting Python environment with Docker 
 
+So far we covered Docker foundation - we saw how to set and build Docker image with the `Dockerfile` and `build` command, respoectivlly, and than run it in a container with the `run` command. In this section, we will connect all the dotes together and focus on setting a Python development enviroment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extention.
 
+
+If you have not installed yet the Dev Containers extension or Docker Desktop, follow the installation instruction above. 
+
+### Environment settings
+
+The Dev Containers extention enables to open a local folder inside a containerized environment. This solve the container ephemeral issue and enables both saving your changes locally and mentain version control with git when collabrating with others. 
+
+To open a local folder with Dev Containers inside 
 
