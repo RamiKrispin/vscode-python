@@ -54,8 +54,11 @@ The main requirements for this tutorial are setting VScode and Docker Desktop. I
 ### Installing VScode
 
 Installing VScode is straightforward - go to the VScode website https://code.visualstudio.com/ and click on the Download button (purple rectangle on the screenshot):
-
+<figure>
 <img src="images/vscode-download.png" width="100%" align="center"/></a>
+<figcaption> Figure 1 - Visual Studio Code download page</figcaption>
+</figure>
+
 
 Download the installation file and follow the instructions. 
 
@@ -68,9 +71,10 @@ Here is how to install an extension on VScode:
 - Click the Extensions button on the left menu (mark with a purple arrow on the screenshot below) 
 - Type the extension name on the search menu (see the yellow rectangular). You can see the search results below, and clicking on each extension will open a window with the extension details. 
 - Last but not least, Click the install button (see the green rectangular) to install the extension
-
+<figure>
 <img src="images/vscode-extensions.png" width="100%" align="center"/></a>
-
+<figcaption> Figure 2 - Steps to install extension on VScode</figcaption>
+</figure>
 **Note:** The Dev Containers extension is required to launch the dockerized environment. We will see later in this tutorial how to set and install the necessary extensions for your dockerized environment automatically with the `devcontainer.json` file.
 
 ### Setting Docker
@@ -79,9 +83,10 @@ Various ways exist to build and run Docker images on different operations system
 **Note:** Docker Desktop is free for personal use but requires a license for commercial use. For further information, please refer to https://www.docker.com/pricing/.
 
 To install Docker Desktop, go to Docker website and follow the installation instructions according to your OS:
-
+<figure>
  <img src="images/docker-install.png" width="100%" align="center"/></a>
-
+<figcaption> Figure 3 - Docker Desktop download page</figcaption>
+</figure>
 
 ### Docker Hub
 
@@ -167,9 +172,10 @@ Before diving into the core functionality of Docker, let's review the generic de
 ### General architecture
 
 The diagram below describes a high-level architecture of a Dockerized development environment with VScode. It might be overwhelming if you have never used Docker before, and it will make more sense (I hope) by the end of this section.
-
+<figure>
 <img src="images/docker-architecture.png" width="100%" align="center"/></a>
-
+<figcaption> Figure 4 - Development workflow with VScode and Docker</figcaption>
+</figure>
 This process includes the following components:
 - **Dev Container** - is the VScode extension that enables you to execute your local code inside a dockerized environment seamlessly. By default, it mounts your local folder to the docker environment ensuring your code runs inside the container and lives locally.
 - **devcontainer.json** - is the Dev Container configuration file that enables you to highly customize your VScode development environment when using the Dev Container extension. From settings the VScode options (e.g., fonts, list of extensions to install, etc.) to the Docker settings (similar to the docker-compose.yml file functionality)
@@ -188,8 +194,10 @@ Let's now organize and order this process to a general workflow. The below diagr
 - **Testing** - this is a recommended intermediate step before shipping your code and environment to deployment. There are multiple approaches to code and environment testing, and the main goal is to ensure that your code sync with the dockerized environment and identify potential problems before deploying it.
 - **Deployment** - last but not least, using code and container registry (e.g., Github and Docker Hub), we can deploy our code using the same dockerized environment to some remote server (e.g., Github Actions, AWS, GCP, Azure, etc.) or have your peers run your code in their computer. 
 
-
+<figure>
 <img src="images/docker-workflow.png" width="100%" align="center"/></a>
+<figcaption> Figure 5 - Development with VScode and Docker workflow</figcaption>
+</figure>
 
 In the next section, we review Docker basic commands and learn how to set a Dockerfile. 
 
@@ -199,9 +207,10 @@ Generally, the VScode **Dev Container** extension lets you containerize your env
 - **Dockerfile** - the image recipe, allows you to add components and customize the dependencies according to the development environment requirements  
 - **Docker CLI** - core commands to build the image and run it as a containerized environment 
 
-
+<figure>
 <img src="images/dockerfile to container.png" width="100%" align="center"/></a>
-
+<figcaption> Figure 6 - Docker general workflow</figcaption>
+</figure>
 
 **Note:** It is important to emphasize that this section covers the basic Docker requirements for this tutorial and is not an alternative to a full Docker tutorial or course. 
 
@@ -315,8 +324,10 @@ The build process of Docker's images is based on layers. Depending on the contex
 - The first layer started with `[1/2] FROM...`, corresponding to the `FROM python:3.10` line on the `Dockerfile`, which import the Python 3.10 official image
 - The second layer started with `[2/2] RUN apt-get...`, corresponding  to the `RUN` command on the `Dockerfile`
 
-
+<figure>
 <img src="images/docker-layers.png" width="100%" align="center"/></a>
+<figcaption> Figure 7 - Example of a build output with respect to the Dockerfile</figcaption>
+</figure>
 
 The `docker inspect` command returns the image metadata details in a JSON format. That includes the envrioment variables, labels, layers and general metadata. In the following example, we will us [jq](https://jqlang.github.io/jq/) to extract the layers information from the metadata JSON file:
 
@@ -450,18 +461,77 @@ Since we already cached the 3rd layer on the previous build, all the layers in t
 
 When setting your Dockerfile, you should be minded and strategic to the layers caching process. The order of the layers does matter! The following images demonstrate when the docker engine will use cached layers and when to rebuild them. The first image illustrates the initial build: 
 
-
+<figure>
 <img src="images/docker layers 1.png" width="100%" align="center"/></a>
+<figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the coorisponding layers</figcaption>
+</figure>
 
 In this case, we have a Dockerfile with four commands that are translated during the build time into four layers. What will happen if we add a fifth command and place it right after the third one? The docker engine will identify that the first and second commands in the Dockerfile did not change and, therefore, will use the corresponding cached layers (one and two), and rebuild the rest of the layers from scratch:
 
+<figure>
 <img src="images/docker layers 2.png" width="100%" align="center"/></a>
+<figcaption> Figure 9 - Illustration of the caching process during the rebuild of an image</figcaption>
+</figure>
 
 When planning your Dockerfile, if applicable,  a good practice is to place the commands that will most likely stay the same and keep new updates to the end of the file if possible.
 
 That was just the tip of the iceberg, and there is much more to learn about Docker. The next section will explore different methods to run Python inside a container.
 
-## Docker with Python - the hard way
+## Running Python on Docker - the hard way
+
+In the previous sections, we saw how to define the image requirements with the `Dockerfile` and build it with the `build` command. This section focuses on running Python inside a container using the `docker run` command.
+
+### Docker run
+
+The `docker run` or `run` command enables us to create and run a new container from an image. Typically, the `run` command is used to launch a dockerized application or server or to execute a code following the below syntax:
+
+``` shell
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+
+For example, we can use the `run` command with the official Python 3.10 image:
+
+``` shell
+docker run python:3.10 
+```
+
+Surprisingly (or not), nothing happened. To understand that better, we need to go back to the `Dockerfile`. Generally, images can be used to run:
+- Server
+- Application
+
+In both cases, we use the `Dockerfile` to set and enable launching them during the run time. In the case of a server, we use on the `Dockerfile` the `PORT` and `CMD` commands to set the server's port on the image and launch the server, respectively. We then use the `run` command and add the `-p` (or `--publish list`) option to map the server's port with a local port. Similarly, to launch an application, we use the `CMD` command on the `Dockerfile` to define the launch command during the run time and use the `--interactive` and  `--tty` options to launch the container in interactive mode, which enables us to access the application.
+
+Let's now go back to the `python:3.10` image and use the `inspect` command to check if the `CMD` command was defined:
+
+``` shell
+> docker inspect python:3.10 | jq '.[] | .Config.Cmd'
+[
+  "python3"
+]
+```
+
+**Note:** We used the `jq` library again  to parse out from the JSON output the CMD metadata
+
+As you can see, the `CMD` on the `python:3.10` image is set to run the default Python launch command - `python3`, which launches Python during the run time. Let's now add the `--interactive` and  `--tty` options to run the container in an interactive mode:
+
+```shell
+ docker run --interactive --tty python:3.10 
+ ```
+This launches the default Python version on the image. We can then test it by using the `print` command to print `Hello World!`:
+
+```python
+Python 3.10.12 (main, Jun 14 2023, 18:40:54) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("Hello World!")
+Hello World!
+>>> 
+```
+
+OK, we have Python running inside a dockerized environment, so why should we not use it? Mainly due to the following reasons:
+- This is not a development environment, and it is harder (in my mind) to maintain and develop code from the terminal with respect to Python IDEs such as PyCharm or VScode. 
+- By default, the `docker run` is an ephemeral process, and therefore, your code is lost when you shut down the container.
+
+While there are ways to overcome the above issues, it is still convoluted and not as efficient as using VScode. In the next section, we will see how to set and run Python code with VScode and the Dev Containers extension.
 
 ## Setting Python environment with Docker 
 
