@@ -591,6 +591,10 @@ As can see in the above `devcontainer.json`, the `build` section defines the ima
 
 
 
+<video controls="controls" width="800" height="400" name="Luanching Dev Container">
+  <source src="images/open_dev_container.mov">
+</video>
+
 https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
 https://containers.dev/implementors/json_reference/

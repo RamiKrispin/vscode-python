@@ -4,25 +4,16 @@
         "dockerfile": "../examples/ex-1/Dockerfile",
         "context": "../examples/ex-1/"
     }, 
-    "settings": {
-    },
     "customizations": {
         "vscode": {
             "extensions": [
                 "quarto.quarto",
                 "ms-azuretools.vscode-docker",
                 "ms-python.python",
-                "rdebugger.r-debugger",
                 "ms-vscode-remote.remote-containers",
                 "yzhang.markdown-all-in-one",
-                "reditorsupport.r",
                 "redhat.vscode-yaml",
-                "REditorSupport.r",
-                "REditorSupport.r-lsp", 
-                "RDebugger.r-debugger",
-                "purocean.drawio-preview",
-                "graysonstream.airflow-templates",
-                "necatiarslan.airflow-vscode-extension",
+                "ms-toolsai.jupyter",
                 "hediet.vscode-drawio"
             ]
         }
