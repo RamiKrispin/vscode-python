@@ -535,14 +535,63 @@ While there are ways to overcome the above issues, it is still convoluted and no
 
 ## Setting Python environment with Docker 
 
-So far we covered Docker foundation - we saw how to set and build Docker image with the `Dockerfile` and `build` command, respoectivlly, and than run it in a container with the `run` command. In this section, we will connect all the dotes together and focus on setting a Python development enviroment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extention.
+So far, we covered the foundation of Docker. We saw how to set and build an image with the `Dockerfile` and the `build` command, respectively, and then run it in a container with the `run` command. This section will focus on setting up a Python development environment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
+
+If you still need to install the Dev Containers extension or Docker Desktop, follow the installation instruction above. 
+
+### Setting the Dev Containers extension
+
+The Dev Containers extension enables to open a local folder inside a containerized environment. This solves the container ephemeral issue and enables you to maintain your code locally while developing and testing it inside a container.
+
+To set the Dev Containers extension on your local folder, create a folder named `.devcontainer` and add the `devcontainer.json` file. Generally, your project folder should follow the following structure:
+
+``` shell
+.
+├── .devcontainer
+│   └── devcontainer.json
+└── Your Projects Files
+``` 
+
+The `devcontainer.json` defines and customizes the container and VScode setting, such as:
+
+- Image settings - defines the image build method or if to pull an existing one 
+- Project settings such as extensions to install and command to execute during the launch time of the container
 
 
-If you have not installed yet the Dev Containers extension or Docker Desktop, follow the installation instruction above. 
 
-### Environment settings
+Let's start with a practical example by setting the environment using the same image we build in the first example above (e.g., `rkrispin/vscode-python:ex1`). During the launch time of the environment, the Dev Containers extension follows the instractions in the `devcontainer.json` and sets the environment accordingly: 
 
-The Dev Containers extention enables to open a local folder inside a containerized environment. This solve the container ephemeral issue and enables both saving your changes locally and mentain version control with git when collabrating with others. 
+`.devcontainer/devcontainer.json`
+``` json
+{
+    "name": "Example 1",
+    "build":{
+        "dockerfile": "../examples/ex-1/Dockerfile",
+        "context": "../examples/ex-1/"
+    }, 
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "quarto.quarto",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "ms-vscode-remote.remote-containers",
+                "yzhang.markdown-all-in-one",
+                "redhat.vscode-yaml",
+                "ms-toolsai.jupyter",
+                "hediet.vscode-drawio"
+            ]
+        }
+    }  
+}
+```
 
-To open a local folder with Dev Containers inside 
+As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build, in this case, `/examples/ex-1/Dockerfile`. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
+
+
+
+
+https://code.visualstudio.com/docs/devcontainers/containers
+https://code.visualstudio.com/docs/devcontainers/tutorial
+https://containers.dev/implementors/json_reference/
 
