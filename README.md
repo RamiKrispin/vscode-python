@@ -589,11 +589,10 @@ Let's start with a practical example by setting the environment using the same i
 As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build, in this case, `/examples/ex-1/Dockerfile`. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
 
 
-
-
-<video controls="controls" width="800" height="400" name="Luanching Dev Container">
-  <source src="images/open_dev_container.mov">
-</video>
+<figure>
+<img src="images/open_dev_container.gif" width="100%" align="center"/></a>
+<figcaption> Figure 10 - Open a folder inside a container with the Dev Containers extension</figcaption>
+</figure>
 
 https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
