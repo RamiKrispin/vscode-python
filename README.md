@@ -76,6 +76,8 @@ Here is how to install an extension on VScode:
 <figcaption> Figure 2 - Steps to install extension on VScode</figcaption>
 </figure>
 
+<br>
+
 **Note:** The Dev Containers extension is required to launch the dockerized environment. We will see later in this tutorial how to set and install the necessary extensions for your dockerized environment automatically with the `devcontainer.json` file.
 
 ### Setting Docker
@@ -88,6 +90,8 @@ To install Docker Desktop, go to Docker website and follow the installation inst
  <img src="images/docker-install.png" width="100%" align="center"/></a>
 <figcaption> Figure 3 - Docker Desktop download page</figcaption>
 </figure>
+
+<br>
 
 ### Docker Hub
 
@@ -177,6 +181,10 @@ The diagram below describes a high-level architecture of a Dockerized developmen
 <img src="images/docker-architecture.png" width="100%" align="center"/></a>
 <figcaption> Figure 4 - Development workflow with VScode and Docker</figcaption>
 </figure>
+
+<br>
+
+
 This process includes the following components:
 - **Dev Container** - is the VScode extension that enables you to execute your local code inside a dockerized environment seamlessly. By default, it mounts your local folder to the docker environment ensuring your code runs inside the container and lives locally.
 - **devcontainer.json** - is the Dev Container configuration file that enables you to highly customize your VScode development environment when using the Dev Container extension. From settings the VScode options (e.g., fonts, list of extensions to install, etc.) to the Docker settings (similar to the docker-compose.yml file functionality)
@@ -200,6 +208,8 @@ Let's now organize and order this process to a general workflow. The below diagr
 <figcaption> Figure 5 - Development with VScode and Docker workflow</figcaption>
 </figure>
 
+<br>
+
 In the next section, we review Docker basic commands and learn how to set a Dockerfile. 
 
 ## Getting started with Docker
@@ -212,6 +222,8 @@ Generally, the VScode **Dev Container** extension lets you containerize your env
 <img src="images/dockerfile to container.png" width="100%" align="center"/></a>
 <figcaption> Figure 6 - Docker general workflow</figcaption>
 </figure>
+
+<br>
 
 **Note:** It is important to emphasize that this section covers the basic Docker requirements for this tutorial and is not an alternative to a full Docker tutorial or course. 
 
@@ -329,6 +341,8 @@ The build process of Docker's images is based on layers. Depending on the contex
 <img src="images/docker-layers.png" width="100%" align="center"/></a>
 <figcaption> Figure 7 - Example of a build output with respect to the Dockerfile</figcaption>
 </figure>
+
+<br>
 
 The `docker inspect` command returns the image metadata details in a JSON format. That includes the envrioment variables, labels, layers and general metadata. In the following example, we will us [jq](https://jqlang.github.io/jq/) to extract the layers information from the metadata JSON file:
 
@@ -467,12 +481,16 @@ When setting your Dockerfile, you should be minded and strategic to the layers c
 <figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the coorisponding layers</figcaption>
 </figure>
 
+<br>
+
 In this case, we have a Dockerfile with four commands that are translated during the build time into four layers. What will happen if we add a fifth command and place it right after the third one? The docker engine will identify that the first and second commands in the Dockerfile did not change and, therefore, will use the corresponding cached layers (one and two), and rebuild the rest of the layers from scratch:
 
 <figure>
 <img src="images/docker layers 2.png" width="100%" align="center"/></a>
 <figcaption> Figure 9 - Illustration of the caching process during the rebuild of an image</figcaption>
 </figure>
+
+<br>
 
 When planning your Dockerfile, if applicable,  a good practice is to place the commands that will most likely stay the same and keep new updates to the end of the file if possible.
 
@@ -545,6 +563,7 @@ If you still need to install the Dev Containers extension or Docker Desktop, fol
 <img src="images/dev_container_symbol.png" width="20%" align="center"/></a>
 <figcaption> Figure 10 - The Dev Containers extension status bar symbol</figcaption>
 </figure>
+<br>
 
 ### Setting the Dev Containers extension
 
@@ -602,6 +621,8 @@ Once you set the `devcontainer.json`, to launch the folder inside the container,
 <figcaption> Figure 11 - the Dev Containers extensions Command Palette </figcaption>
 </figure>
 
+<br>
+
 The below video demonstrates the full process of launching the Python environment inside a container with the Dev Containers extension:
 
 
@@ -609,12 +630,13 @@ The below video demonstrates the full process of launching the Python environmen
 <img src="images/open_dev_container.gif" width="100%" align="center"/></a>
 <figcaption> Figure 12 - Open a folder inside a container with the Dev Containers extension</figcaption>
 </figure>
+<br>
 
-
-
+The next section focuses on customizing the Python environment.
 
 
 Resources:
+
 https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
 https://containers.dev/implementors/json_reference/
