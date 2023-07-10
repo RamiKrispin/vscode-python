@@ -633,7 +633,7 @@ The below video demonstrates the full process of launching the Python environmen
 <figcaption> Figure 12 - Open a folder inside a container with the Dev Containers extension</figcaption>
 </figure>
 
-<br>
+<br/>
 
 The next section focuses on customizing the Python environment.
 
