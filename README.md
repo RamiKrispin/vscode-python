@@ -637,8 +637,25 @@ The below video demonstrates the full process of launching the Python environmen
 
 The next section focuses on customizing the Python environment.
 
+## Setting the Python environment
 
-Resources:
+Finally, after we set the Dev Containers extension and installed the other requirements, we can start setting our Python environment. This section covers different approaches for setting Python environment with the `devcontainer.json`. We will mainly focus on the following two approaches:
+- Build the image during the launch time of the environment 
+- Import a pre-built and ready-to-use image with all the project requirements
+
+
+The main advantage of the first approach over the second is its flexibility. It enables you to modify and often make changes in the environment seamlessly. This could be handy when your environment is not stable while testing new features and often applying changes. On the other hand, with the second approach, it is faster to launch the containerized environment (once you cached the image), but it has less flexibility when changes are required.This second approach is preferred when your environment is stable and no frequent changes are expected.
+
+Of course, there is a middle ground, a combination of the two approaches. First, build a stable image with the core requirements of your project. Then, use this image as a baseline for your build during the launch time of the container, and add additional components during the launch time as needed. 
+
+
+
+
+
+
+
+
+## Resources
 
 https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
