@@ -75,6 +75,7 @@ Here is how to install an extension on VScode:
 <img src="images/vscode-extensions.png" width="100%" align="center"/></a>
 <figcaption> Figure 2 - Steps to install extension on VScode</figcaption>
 </figure>
+
 **Note:** The Dev Containers extension is required to launch the dockerized environment. We will see later in this tutorial how to set and install the necessary extensions for your dockerized environment automatically with the `devcontainer.json` file.
 
 ### Setting Docker
@@ -537,7 +538,13 @@ While there are ways to overcome the above issues, it is still convoluted and no
 
 So far, we covered the foundation of Docker. We saw how to set and build an image with the `Dockerfile` and the `build` command, respectively, and then run it in a container with the `run` command. This section will focus on setting up a Python development environment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
-If you still need to install the Dev Containers extension or Docker Desktop, follow the installation instruction above. 
+If you still need to install the Dev Containers extension or Docker Desktop, follow the installation instruction above. Once the extension is installed, you should expect to see on the far left side the extension status bar symbol (`><` alike):
+
+
+<figure>
+<img src="images/dev_container_symbol.png" width="20%" align="center"/></a>
+<figcaption> Figure 10 - The Dev Containers extension status bar symbol</figcaption>
+</figure>
 
 ### Setting the Dev Containers extension
 
@@ -588,12 +595,26 @@ Let's start with a practical example by setting the environment using the same i
 
 As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build, in this case, `/examples/ex-1/Dockerfile`. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
 
+Once you set the `devcontainer.json`, to launch the folder inside the container, go to the bottom far left side of your VScode screen and click the Dev Containers' status bar ()`><` symbol alike). This will open the VScode Command Palette on the top of the screen, and you should see the Dev Containers extension's common commands. Select the `Reopen in Container` options (see the screenshot below):
+
+<figure>
+<img src="images/command-palette.png" width="100%" align="center"/></a>
+<figcaption> Figure 11 - the Dev Containers extensions Command Palette </figcaption>
+</figure>
+
+The below video demonstrates the full process of launching the Python environment inside a container with the Dev Containers extension:
+
 
 <figure>
 <img src="images/open_dev_container.gif" width="100%" align="center"/></a>
-<figcaption> Figure 10 - Open a folder inside a container with the Dev Containers extension</figcaption>
+<figcaption> Figure 12 - Open a folder inside a container with the Dev Containers extension</figcaption>
 </figure>
 
+
+
+
+
+Resources:
 https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
 https://containers.dev/implementors/json_reference/
