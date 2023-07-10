@@ -552,7 +552,7 @@ OK, we have Python running inside a dockerized environment, so why should we not
 
 While there are ways to overcome the above issues, it is still convoluted and not as efficient as using VScode. In the next section, we will see how to set and run Python code with VScode and the Dev Containers extension.
 
-## Setting Python environment with Docker 
+## Setting the Dev Containers extension
 
 So far, we covered the foundation of Docker. We saw how to set and build an image with the `Dockerfile` and the `build` command, respectively, and then run it in a container with the `run` command. This section will focus on setting up a Python development environment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
@@ -565,7 +565,7 @@ If you still need to install the Dev Containers extension or Docker Desktop, fol
 </figure>
 <br>
 
-### Setting the Dev Containers extension
+### Setting the devcontainer.json file
 
 The Dev Containers extension enables to open a local folder inside a containerized environment. This solves the container ephemeral issue and enables you to maintain your code locally while developing and testing it inside a container.
 
@@ -613,6 +613,8 @@ Let's start with a practical example by setting the environment using the same i
 ```
 
 As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build, in this case, `/examples/ex-1/Dockerfile`. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
+
+### Launching the folder inside a container
 
 Once you set the `devcontainer.json`, to launch the folder inside the container, go to the bottom far left side of your VScode screen and click the Dev Containers' status bar ()`><` symbol alike). This will open the VScode Command Palette on the top of the screen, and you should see the Dev Containers extension's common commands. Select the `Reopen in Container` options (see the screenshot below):
 
