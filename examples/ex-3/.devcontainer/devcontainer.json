@@ -1,10 +1,9 @@
 {
-    "name": "Python Dev",
-    "build": {
+    "name": "Example 1",
+    "build":{
         "dockerfile": "Dockerfile",
-        "context": ".."
-    },
-    
+        "context": "../"
+    }, 
     "customizations": {
         "vscode": {
             "extensions": [
@@ -14,8 +13,9 @@
                 "ms-vscode-remote.remote-containers",
                 "yzhang.markdown-all-in-one",
                 "redhat.vscode-yaml",
-                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter",
+                "hediet.vscode-drawio"
             ]
         }
-    }
+    }  
 }
