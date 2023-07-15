@@ -592,8 +592,8 @@ Let's start with a practical example by setting the environment using the same i
 {
     "name": "Example 1",
     "build":{
-        "dockerfile": "../examples/ex-1/Dockerfile",
-        "context": "../examples/ex-1/"
+        "dockerfile": "Dockerfile",
+        "context": "../"
     }, 
     "customizations": {
         "vscode": {
@@ -612,7 +612,9 @@ Let's start with a practical example by setting the environment using the same i
 }
 ```
 
-As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build, in this case, `/examples/ex-1/Dockerfile`. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
+**Note:** The `devcontainer.json` file must be stored under the `.devcontainer` folder or in the project root folder. To run the above example, you will have to open the `./examples/exp-3` folder in VScode as the project folder using the `File` -> `Open Folder...` options. 
+
+As can see in the above `devcontainer.json`, the `build` section defines the image build process. The `dockerfile` argument points out to the `Dockerfile` to use for the build. The `context` argument defines the files' system path for the `Dockerfile`. Although, we currently do not use the `context` argument in the build time, we will see its applications later. In addition, the `customizations` section enables you to customize the VScode options, such as extensions to install, default Python interpreter, and files to execute during the container launch.
 
 ### Launching the folder inside a container
 
@@ -639,18 +641,76 @@ The next section focuses on customizing the Python environment.
 
 ## Setting the Python environment
 
+In this section, we will connect all the dots together and build a Python development environment using the following architecture:
+- We will start by setting the image using the following files:
+  - Create a `Dockerfile` to define the environment settings (e.g., Python version, packages to install, etc.). In addition, we will use the following helper files:
+    - I like to keep the `Dockerfile` as concise as possible by using a helper bash script (`install_dependencies.sh`) to install all the environment dependencies, such as Debian packages, installing and setting the Python environment with Conda (or a similar solution), etc. 
+    - In addition, we will use the `requirements.txt` file to define the list of Python packages to install in the environment
+  - The next step is to set up the Dev Containers extension:
+    - We will use the `devcontainer.json` file to define the VScode settings for the development environment. That includes the build method, a list of extensions to set, local volumes to mount, and defining environment variables, etc.
+    - In addition, we will use the `devcontainer.env` file to set additional environment variables. Note that those variables neither be available during the build time nor can be called by `devcontainer.json` file
+
+Just before getting started, let's define our environment requirments:
+- Python version 3.10
+- Install the following packages:
+  - pandas v2.0.3
+  - plotly v5.15.0
+- Conda for setting the virtual environment
+- Install the following extensions:
+  - Docker support
+  - Python language support
+  - Markdown editor
+  - Quarto editor
+  - YAML language support 
+  - Jupyter notebook support
+- Last but not least, we would like to mount a local folder that is not the project folder to load CSV files
+
+In addition, to make this setting as customized as possible, we will set locally environment variables that will enable us to modify our settings, if needed. That includes the following variables:
+
+
+
+
+
+
+
+
 Finally, after we set the Dev Containers extension and installed the other requirements, we can start setting our Python environment. This section covers different approaches for setting Python environment with the `devcontainer.json`. We will mainly focus on the following two approaches:
 - Build the image during the launch time of the environment 
 - Import a pre-built and ready-to-use image with all the project requirements
 
 
-The main advantage of the first approach over the second is its flexibility. It enables you to modify and often make changes in the environment seamlessly. This could be handy when your environment is not stable while testing new features and often applying changes. On the other hand, with the second approach, it is faster to launch the containerized environment (once you cached the image), but it has less flexibility when changes are required.This second approach is preferred when your environment is stable and no frequent changes are expected.
+The main advantage of the first approach over the second is its flexibility. It enables you to modify and often make changes in the environment seamlessly. This could be handy when your environment is unstable while testing new features and applying changes. On the other hand, with the second approach, it is faster to launch the containerized environment (once you cached the image), but it has less flexibility when you wish to change or update the environment. This second approach is preferred when your environment is stable and no frequent changes are expected.
 
 Of course, there is a middle ground, a combination of the two approaches. First, build a stable image with the core requirements of your project. Then, use this image as a baseline for your build during the launch time of the container, and add additional components during the launch time as needed. 
 
+### Environment Requirements
+
+Before we get started with the `devcontainer.json` setting, you should define the environment requirements:
+- Python version
+- Python packages and their version
+- Files system requirements (e.g., local folders to month, etc.)
+- VScode extensions
 
 
+In the following example, we will define the a simplistic Python environment that includes:
+- Python 3.10
+- Packages:
+  - pandas v2.0.3
+  - plotly v5.15.0
+- Install the following extensions:
+  - Docker support
+  - Python language support
+  - Markdown editor
+  - Quarto editor
+  - YAML language support 
+  - Jupyter notebook support
+- Last but not least, we would like to mount a local folder that is not the project folder to load CSV files
 
+In addition, to make this setting as customized as possible, we will set locally environment variables that will enable us to modify our settings, if needed. That includes the following variables:
+- `ENV_NAME` - we will use this variable to set the Conda environment name and to set the path to the default Python interpreter
+- `PYTHON_VER` - set the Python version for the conda environment
+- `CSV_PATH` - the local path for a folder with CSV files
+- `MY_VAR` - A general variable that we will use as example for setting environment variables
 
 
 
