@@ -857,9 +857,15 @@ import plotly.express as px
 print("Hello World!")
 ```
 
- 
+ That's it! We are ready to launch the environment with the Dev Containers extension:
 
 
+<figure>
+<img src="images/open_dev_container2.gif" width="100%" align="center"/></a>
+<figcaption> Figure 13 - Launch the Python Environment with the Dev Containers extension</figcaption>
+</figure>
+
+<br/>
 
 ## Resources
 
