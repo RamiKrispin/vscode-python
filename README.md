@@ -872,7 +872,7 @@ With the `mounts` argument, we mount a local folder (outside the current folder)
 
 The `remoteEnv` enables to set environment variables with the container. Alternatively, you can add a `.env` file with a list of environment variables using the `runArgs` argument.
 
-The `postCreateCommand` argument, as its name implies, enables executing commands after the build process is done. We use it to run a simple test script:
+The `postCreateCommand` argument allows for the execution of commands after the build process has finished. In this case, we utilize it to run a basic test script that checks if the packages can be loaded and prints out the message `Hello World!`:
 
 `tests/test1.py`
 ```python
