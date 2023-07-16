@@ -879,10 +879,16 @@ Last but not least, all feedback is welcome! Please feel free to open an issue i
 
 ## Resources
 
-https://code.visualstudio.com/docs/devcontainers/containers
-https://code.visualstudio.com/docs/devcontainers/tutorial
-https://containers.dev/implementors/json_reference/
+- Docker
+  - [Docker](https://www.docker.com/)
+  - [Docker Hub](https://hub.docker.com/)
+  - [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w&ab_channel=TechWorldwithNana)
+  - [Docker Tutorial for Beginners - A Full DevOps Course on How to Run Applications in Containers](https://www.youtube.com/watch?v=fqMOX6JJhGo&t=2s&ab_channel=freeCodeCamp.org)
 
+- VScode
+  - [VScode documentaion](https://code.visualstudio.com/docs)
+  
+  - [Dev Containers documentation](https://code.visualstudio.com/docs/devcontainers/containers)
 ## License
 
 This tutorial is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) License.
