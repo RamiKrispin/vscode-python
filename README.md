@@ -887,8 +887,9 @@ Last but not least, all feedback is welcome! Please feel free to open an issue i
 
 - VScode
   - [VScode documentaion](https://code.visualstudio.com/docs)
-  
   - [Dev Containers documentation](https://code.visualstudio.com/docs/devcontainers/containers)
+
+
 ## License
 
 This tutorial is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) License.
