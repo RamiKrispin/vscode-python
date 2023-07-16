@@ -11,7 +11,9 @@ This repo provides a step-by-step guide and a template for setting up a Python ð
 - [Running Python on Docker - the Hard Way](https://github.com/RamiKrispin/vscode-python/tree/main#running-python-on-docker---the-hard-way)
 - [Setting the Dev Containers Extension](https://github.com/RamiKrispin/vscode-python/tree/main#setting-the-dev-containers-extension)
 - [Setting the Python Environment](https://github.com/RamiKrispin/vscode-python/tree/main#setting-the-python-environment)
+- [Summary](https://github.com/RamiKrispin/vscode-python/tree/main#summary)
 - [Resources](https://github.com/RamiKrispin/vscode-python/tree/main#resources)
+- [License](https://github.com/RamiKrispin/vscode-python/tree/main#license)
 
 ## Motivation
 
@@ -881,3 +883,6 @@ https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
 https://containers.dev/implementors/json_reference/
 
+## License
+
+This tutorial is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) License.
