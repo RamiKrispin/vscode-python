@@ -712,6 +712,178 @@ In addition, to make this setting as customized as possible, we will set locally
 - `CSV_PATH` - the local path for a folder with CSV files
 - `MY_VAR` - A general variable that we will use as example for setting environment variables
 
+On Mac and Linux you can use the `.zshrc` file to set those variables:
+
+~/.zshrc  
+```
+# Setting env variables for VScode
+export ENV_NAME=python_tutorial
+export PYTHON_VER=3.10
+export CSV_PATH=$HOME/Desktop/CSV
+export MY_VAR=some_var
+```
+
+For Windows users, you can use the `setx` command to the environment vairables:
+```
+setx variable_name "variable_value"
+```
+
+**Note:** New environment variables won't be available, if added during an active session, until closing and reopening the session.
+
+
+
+
+### Setting the image
+
+We will use the below `Dockerfile` to build our Python environment:
+
+`.devcontainer/Dockerfile`
+``` Dockerfile
+FROM python:3.10
+
+# Arguments
+ARG PYTHON_VER
+ARG ENV_NAME
+
+# Environment variables
+ENV ENV_NAME=$ENV_NAME
+ENV PYTHON_VER=$PYTHON_VER
+
+# Copy files
+RUN mkdir requirements
+COPY requirements.txt requirements/
+COPY install_dependencies.sh requirements/
+
+# Install dependencies
+RUN bash requirements/install_dependencies.sh $ENV_NAME $PYTHON_VER
+
+```
+
+To keep the build time fairly short, we use the Python official image as our base image for our environment. The main advantage of using this base image type is that it comes with most of the required dependencies and saves us time (and pain). 
+
+Using arguments enables us to parameterize our environment settings. In this case, the user can modify the Python version and environment name using the `PYTHON_VER` and `ENV_NAME` arguments. I then set those arguments as environment variables for convenience (staying available after the build).
+
+Last but not least, we create a local folder (`requirements`) inside the image and copy files from our local drive based on the path that was defined by the context argument on the `devcontainer.json` file. The `install_dependencies.sh` is a bash helper script that installs dependencies (conda, vim, etc.), sets the conda environment, and installs Python packages using the list in the `requirements.txt` file.
+
+
+While we set the Python environment with conda, you can modify the script below to other alternatives such as `venv`, , and `Poetry` in the below script:
+
+`.devcontainer/install_dependencies.sh`
+``` bash
+#!/bin/bash
+
+CONDA_ENV=$1
+PYTHON_VER=$2
+CPU=$(uname -m)
+
+
+# Installing prerequisites
+apt-get update && \
+    apt-get install -y \
+    python3-launchpadlib \
+    vim \
+    && apt update 
+
+
+# Install miniconda
+apt update && apt-get install -y --no-install-recommends \
+    software-properties-common \
+    && add-apt-repository -y ppa:deadsnakes/ppa \
+    && apt update 
+
+wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-${CPU}.sh -O ~/miniconda.sh \
+    && /bin/bash ~/miniconda.sh -b -p /opt/conda \
+    && export PATH=/opt/conda/bin:$PATH \
+    && conda init bash \
+    && conda install conda-build
+
+# Set environment
+. /root/.bashrc \
+    && conda create -y --name $CONDA_ENV python=$PYTHON_VER 
+
+echo "conda activate $CONDA_ENV" >> ~/.bashrc
+
+conda activate $CONDA_ENV
+
+# Install the Python packages
+pip3 install -r requirements/requirements.txt
+
+```
+
+We will set the required packages for the Python environment with the `requirements.txt` file: 
+
+`.devcontainer/requirements.txt`
+```txt
+wheel==0.40.0
+pandas==2.0.3
+python==5.15.0
+plotly-express==0.4.1
+```
+
+### Setting the devcontainer.json file
+
+Once we set the image, the next step is setting the `devcontainer.json` file. We incorporated environment variables in the below settings to enable the seamless creation of multiple environments:
+
+
+`.devcontainer/devcontainer.json`
+
+```json
+{
+    "name": "${localEnv:ENV_NAME}",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {"ENV_NAME": "${localEnv:ENV_NAME}",
+                 "PYTHON_VER": "${localEnv:PYTHON_VER}"}, 
+        "context": "."
+    },
+    "customizations": {
+        "settings": {
+            "python.defaultInterpreterPath": "/opt/conda/envs/${localEnv:ENV_NAME}/bin/python"
+        },
+        "vscode": {
+            "extensions": [
+                "quarto.quarto",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "ms-vscode-remote.remote-containers",
+                "yzhang.markdown-all-in-one",
+                "redhat.vscode-yaml",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
+
+    "mounts": [
+            "source=${localEnv:CSV_PATH},target=/home/csv,type=bind,consistency=cache"
+    ],
+    "remoteEnv": {
+        "MY_VAR": "${localEnv:MY_VAR}"
+    },
+    "runArgs": ["--env-file",".devcontainer/devcontainer.env"],
+    "postCreateCommand": "python3 tests/test1.py"
+}
+```
+
+For the build, we use the `dockerfile`, `args`, and `context` to define the Dockerfile, arguments (e.g., Python version and environment name), and folder contest during the build, respectively.
+
+We use the `python.defaultInterpreterPath` argument to set the path of the default Python interpreter to the conda environment we set during the build.
+
+With the `mounts` argument, we mount a local folder (outside the current folder) with a path inside the container (e.g., `home/csv`). Generally, you would use this option when you wish to load a file or data from a folder outside your working folder or make the separation between your data and code. In this case, the `CSV_PATH` environment variable defines the path of the local folder.
+
+The `remoteEnv` enables to set environment variables with the container. Alternatively, you can add a `.env` file with a list of environment variables using the `runArgs` argument.
+
+The `postCreateCommand` argument, as its name implies, enables executing commands after the build process is done. We use it to run a simple test script:
+
+`tests/test1.py`
+```python
+import pandas as pd
+import plotly as py
+import plotly.express as px
+
+print("Hello World!")
+```
+
+ 
 
 
 
