@@ -1,8 +1,8 @@
 {
-    "name": "${localEnv:PROJECT_NAME}",
+    "name": "${localEnv:ENV_NAME}",
     "build": {
         "dockerfile": "Dockerfile",
-        "args": {"CONDA_ENV": "${localEnv:ENV_NAME}",
+        "args": {"ENV_NAME": "${localEnv:ENV_NAME}",
                  "PYTHON_VER": "${localEnv:PYTHON_VER}"}, 
         "context": "."
     },
@@ -30,5 +30,5 @@
         "MY_VAR": "${localEnv:MY_VAR}"
     },
     "runArgs": ["--env-file",".devcontainer/devcontainer.env"],
-    "postCreateCommand": "python3 tests/test.py"
+    "postCreateCommand": "python3 tests/test1.py"
 }

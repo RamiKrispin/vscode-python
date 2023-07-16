@@ -1,11 +1,11 @@
 #!/bin/bash
 
-CONDA_ENV=$1
+ENV_NAME=$1
 PYTHON_VER=$2
 CPU=$(uname -m)
 
 
-# Installing pre
+# Installing prerequisites
 apt-get update && \
     apt-get install -y \
     python3-launchpadlib \
@@ -27,11 +27,11 @@ wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-${CPU}.
 
 # Set environment
 . /root/.bashrc \
-    && conda create -y --name $CONDA_ENV python=$PYTHON_VER 
+    && conda create -y --name $ENV_NAME python=$PYTHON_VER 
 
-echo "conda activate $CONDA_ENV" >> ~/.bashrc
+echo "conda activate $ENV_NAME" >> ~/.bashrc
 
-conda activate $CONDA_ENV
+conda activate $ENV_NAME
 
-# Install the Python packages
-pip3 install -r requirements/requirements.txt
+# # Install the Python packages
+pip3 install -r /requirements/requirements.txt
