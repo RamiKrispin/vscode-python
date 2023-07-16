@@ -866,6 +866,15 @@ print("Hello World!")
 
 <br/>
 
+
+## Summary
+
+This tutorial covered the foundation of setting a dockerized development environment for Python with VScode and Docker. We reviewed the process of setting up a Python environment using the Dev Containers extension. While this tutorial does not focus on Docker, it covers the foundation of Docker with the goal of reducing the entry barrier for new users. In addition, we saw how to set up and launch a containerized Python development environment with the Dev Containers extension. 
+
+Using environment variables enables us to parametized the environment and seamlessly modify and costimize it. The example above uses conda to set the Python environment but you can choose any other method that works best for your needs.
+
+Last but not least, all feedback is welcome! Please feel free to open an issue if you have any feedback about the tutorial or found some code issues.
+
 ## Resources
 
 https://code.visualstudio.com/docs/devcontainers/containers
