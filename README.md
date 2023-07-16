@@ -1,18 +1,17 @@
 # Setting Python Development Environment with VScode and Docker
 
-WIP 🚧 🏗 pre spellcheck
-
 This repo provides a step-by-step guide and a template for setting up a Python 🐍 development environment with VScode and Docker 🐳. Docker is an amazing tool, but it has some learning curve. This tutorial aims to reduce the entry barrier for learning tools such as Docker.
 
 ## Table of contents
-- Motivation
-- Scope
-- Prerequisites 
-- General Architecture and Workflow
-- Getting Started with Docker
-- Running Python on Docker - the Hard Way 
-- Setting Python Environment with Docker  🚧 WIP 🏗
-
+- [Motivation](https://github.com/RamiKrispin/vscode-python/tree/main#motivation)
+- [Scope](https://github.com/RamiKrispin/vscode-python/tree/main#scope)
+- [Prerequisites](https://github.com/RamiKrispin/vscode-python/tree/main#prerequisites)
+- [General Architecture and Workflow](https://github.com/RamiKrispin/vscode-python/tree/main#general-architecture-and-workflow)
+- [Getting Started with Docker](https://github.com/RamiKrispin/vscode-python/tree/main#getting-started-with-docker)
+- [Running Python on Docker - the Hard Way](https://github.com/RamiKrispin/vscode-python/tree/main#running-python-on-docker---the-hard-way)
+- [Setting the Dev Containers Extension](https://github.com/RamiKrispin/vscode-python/tree/main#setting-the-dev-containers-extension)
+- [Setting the Python Environment](https://github.com/RamiKrispin/vscode-python/tree/main#setting-the-python-environment)
+- [Resources](https://github.com/RamiKrispin/vscode-python/tree/main#resources)
 
 ## Motivation
 
@@ -212,7 +211,7 @@ Let's now organize and order this process to a general workflow. The below diagr
 
 In the next section, we review Docker basic commands and learn how to set a Dockerfile. 
 
-## Getting started with Docker
+## Getting Started with Docker
 Generally, the VScode **Dev Container** extension lets you containerize your environment by importing a built-in image. However, often, you may want to add more layers (e.g., install additional dependencies) or build it yourself. This section focuses on the essential Docker requirements that will enable you to build your image and run it inside a container:
 
 - **Dockerfile** - the image recipe, allows you to add components and customize the dependencies according to the development environment requirements  
@@ -552,7 +551,7 @@ OK, we have Python running inside a dockerized environment, so why should we not
 
 While there are ways to overcome the above issues, it is still convoluted and not as efficient as using VScode. In the next section, we will see how to set and run Python code with VScode and the Dev Containers extension.
 
-## Setting the Dev Containers extension
+## Setting the Dev Containers Extension
 
 So far, we covered the foundation of Docker. We saw how to set and build an image with the `Dockerfile` and the `build` command, respectively, and then run it in a container with the `run` command. This section will focus on setting up a Python development environment with VScode and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
@@ -639,7 +638,7 @@ The below video demonstrates the full process of launching the Python environmen
 
 The next section focuses on customizing the Python environment.
 
-## Setting the Python environment
+## Setting the Python Environment
 
 In this section, we will connect all the dots together and build a Python development environment using the following architecture:
 - We will start by setting the image using the following files:
