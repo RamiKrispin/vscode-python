@@ -738,7 +738,7 @@ Using arguments enables us to parameterize our environment settings. In this cas
 Last but not least, we create a local folder (`requirements`) inside the image and copy files from our local drive based on the path that was defined by the context argument on the `devcontainer.json` file. The `install_dependencies.sh` is a bash helper script that installs dependencies (conda, vim, etc.), sets the conda environment, and installs Python packages using the list in the `requirements.txt` file.
 
 
-While we set the Python environment with conda, you can modify the script below to other alternatives such as `venv`, , and `Poetry` in the below script:
+While we set the Python environment with conda, you can modify the script below to other alternatives such as `venv`, and `Poetry` in the below script:
 
 `.devcontainer/install_dependencies.sh`
 ``` bash
@@ -781,6 +781,8 @@ conda activate $CONDA_ENV
 pip3 install -r requirements/requirements.txt
 
 ```
+
+**Note:** We use the `uname -m` CLI command to extract the CPU architecture (e.g., Intel, M1/2, etc.) and choose the conda's build accordingly.
 
 We will set the required packages for the Python environment with the `requirements.txt` file: 
 
