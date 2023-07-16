@@ -650,7 +650,8 @@ In this section, we will connect all the dots together and build a Python develo
     - We will use the `devcontainer.json` file to define the VScode settings for the development environment. That includes the build method, a list of extensions to set, local volumes to mount, and defining environment variables, etc.
     - In addition, we will use the `devcontainer.env` file to set additional environment variables. Note that those variables neither be available during the build time nor can be called by `devcontainer.json` file
 
-The `.devcontainer` folder:
+
+The `.devcontainer` folder should have the following files:
 
 ```shell
 .
