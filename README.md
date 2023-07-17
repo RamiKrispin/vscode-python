@@ -791,7 +791,7 @@ We will set the required packages for the Python environment with the `requireme
 ```txt
 wheel==0.40.0
 pandas==2.0.3
-python==5.15.0
+plotly==5.15.0
 plotly-express==0.4.1
 ```
 
