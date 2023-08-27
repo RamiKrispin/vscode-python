@@ -591,7 +591,7 @@ Let's start with a practical example by setting the environment using the same i
 `.devcontainer/devcontainer.json`
 ``` json
 {
-    "name": "Example 1",
+    "name": "Example 3",
     "build":{
         "dockerfile": "Dockerfile",
         "context": "../"
@@ -702,8 +702,6 @@ setx variable_name "variable_value"
 ```
 
 **Note:** VScode caches environment variables during the launch time. Therefore, when adding new environment variables during an open session, they won't be available until completely closing VScode and reopening it.
-
-
 
 
 ### Setting the image
