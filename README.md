@@ -701,7 +701,7 @@ For Windows users, you can use the `setx` command to the environment vairables:
 setx variable_name "variable_value"
 ```
 
-**Note:** New environment variables won't be available, if added during an active session, until closing and reopening the session.
+**Note:** VScode caches environment variables during the launch time. Therefore, when adding new environment variables during an open session, they won't be available until completely closing VScode and reopening it.
 
 
 
