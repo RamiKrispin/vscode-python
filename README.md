@@ -2,6 +2,13 @@
 
 This repo provides a step-by-step guide and a template for setting up a Python 🐍 development environment with VScode and Docker 🐳. Docker is an amazing tool, but it has some learning curve. This tutorial aims to reduce the entry barrier for learning tools such as Docker.
 
+See also:
+- [A Dockerized Python Development Environment Template](https://github.com/RamiKrispin/vscode-python-template)
+- [Setting R Development with VScode and Docker](https://github.com/RamiKrispin/vscode-r)
+- [Running Python/R with Docker vs. Virtual Environment](https://medium.com/@rami.krispin/running-python-r-with-docker-vs-virtual-environment-4a62ed36900f)
+- [Deploy Flexdashboard on Github Pages with Github Actions and Docker](https://github.com/RamiKrispin/deploy-flex-actions)
+- [Docker for Data Scientists 🐳](https://github.com/RamiKrispin/Introduction-to-Docker) (WIP) 
+
 ## Table of contents
 - [Motivation](https://github.com/RamiKrispin/vscode-python/tree/main#motivation)
 - [Scope](https://github.com/RamiKrispin/vscode-python/tree/main#scope)
