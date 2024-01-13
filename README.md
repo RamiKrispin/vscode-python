@@ -4,6 +4,7 @@ This repo provides a step-by-step guide and a template for setting up a Python ð
 
 See also:
 - [A Dockerized Python Development Environment Template](https://github.com/RamiKrispin/vscode-python-template)
+- [A Dockerized Python Development Environment Template - tutorial](https://medium.com/@rami.krispin/setting-a-dockerized-python-development-environment-template-de2400c4812b)
 - [Setting R Development with VScode and Docker](https://github.com/RamiKrispin/vscode-r)
 - [Running Python/R with Docker vs. Virtual Environment](https://medium.com/@rami.krispin/running-python-r-with-docker-vs-virtual-environment-4a62ed36900f)
 - [Deploy Flexdashboard on Github Pages with Github Actions and Docker](https://github.com/RamiKrispin/deploy-flex-actions)
