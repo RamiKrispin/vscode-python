@@ -10,6 +10,11 @@ See also:
 - [Deploy Flexdashboard on Github Pages with Github Actions and Docker](https://github.com/RamiKrispin/deploy-flex-actions)
 - [Docker for Data Scientists 🐳](https://github.com/RamiKrispin/Introduction-to-Docker) (WIP) 
 
+
+<figure>
+<img src="images/python.png" width="100%" align="center"/></a>
+</figure>
+
 ## Table of contents
 - [Motivation](https://github.com/RamiKrispin/vscode-python/tree/main#motivation)
 - [Scope](https://github.com/RamiKrispin/vscode-python/tree/main#scope)
