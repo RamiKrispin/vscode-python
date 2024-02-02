@@ -445,7 +445,7 @@ As can be noticed from the above build output, the first and second layers alrea
 **Note:** By default, the build output is concise and short. You can get more detailed output during the build time by adding the `progress` argument and setting it to `plain`:
 
 ``` shell
-> build . -f ./examples/ex-2/Dockerfile -t rkrispin/vscode-python:ex2 --progress=plain
+> docker build . -f ./examples/ex-2/Dockerfile -t rkrispin/vscode-python:ex2 --progress=plain
 #1 [internal] load .dockerignore
 #1 transferring context: 2B done
 #1 DONE 0.0s
