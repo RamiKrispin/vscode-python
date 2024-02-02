@@ -2,6 +2,14 @@
 
 This repo provides a step-by-step guide and a template for setting up a Python 🐍 development environment with VScode and Docker 🐳. Docker is an amazing tool, but it has some learning curve. This tutorial aims to reduce the entry barrier for learning tools such as Docker.
 
+See also:
+- [A Dockerized Python Development Environment Template](https://github.com/RamiKrispin/vscode-python-template)
+- [A Dockerized Python Development Environment Template - tutorial](https://medium.com/@rami.krispin/setting-a-dockerized-python-development-environment-template-de2400c4812b)
+- [Setting R Development with VScode and Docker](https://github.com/RamiKrispin/vscode-r)
+- [Running Python/R with Docker vs. Virtual Environment](https://medium.com/@rami.krispin/running-python-r-with-docker-vs-virtual-environment-4a62ed36900f)
+- [Deploy Flexdashboard on Github Pages with Github Actions and Docker](https://github.com/RamiKrispin/deploy-flex-actions)
+- [Docker for Data Scientists 🐳](https://github.com/RamiKrispin/Introduction-to-Docker) (WIP) 
+
 ## Table of contents
 - [Motivation](https://github.com/RamiKrispin/vscode-python/tree/main#motivation)
 - [Scope](https://github.com/RamiKrispin/vscode-python/tree/main#scope)
@@ -479,7 +487,7 @@ When setting your Dockerfile, you should be minded and strategic to the layers c
 
 <figure>
 <img src="images/docker layers 1.png" width="100%" align="center"/></a>
-<figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the coorisponding layers</figcaption>
+<figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the corresponding layers</figcaption>
 </figure>
 
 <br>
