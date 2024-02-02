@@ -487,7 +487,7 @@ When setting your Dockerfile, you should be minded and strategic to the layers c
 
 <figure>
 <img src="images/docker layers 1.png" width="100%" align="center"/></a>
-<figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the coorisponding layers</figcaption>
+<figcaption> Figure 8 - Illustration of initial build of image. The left side represents the Dockerfile's commands and the right one the corresponding layers</figcaption>
 </figure>
 
 <br>
