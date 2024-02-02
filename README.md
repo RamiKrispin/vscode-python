@@ -12,7 +12,7 @@ See also:
 
 
 <figure>
-<img src="images/python.png" width="100%" align="center"/></a>
+<img src="images/python.png" width="80%" align="center"/></a>
 </figure>
 
 ## Table of contents
